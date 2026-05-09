@@ -13,6 +13,14 @@ The original starter templates are intentionally not copied here. This project g
 
 This repo is a compact practice lab. Each page gives you the prompt, examples, foundations, mental model, brute-force discussion, optimal approach, edge cases, complexity target, interview follow-ups, starter canvas, hints, and a hidden full solution.
 
+Each challenge also includes an interview rubric:
+
+- What the exercise is training.
+- The rules of the drill.
+- What a strong answer should include.
+- Common mistakes to avoid.
+- What the Playwright submission tests check.
+
 ![Lesson page](docs/screenshots/landing.png)
 
 ## Why
@@ -126,8 +134,11 @@ Useful docs:
 `npm run test:submission` checks exercise behavior. These tests are deliberately behavioral, not implementation-specific:
 
 - The fetch test mocks the Pokemon API.
+- The fetch error test confirms non-OK HTTP responses become visible errors.
 - The storage tests add items, reload the page, and expect them to remain.
+- The storage tests also cover corrupted JSON and removal persistence.
 - The typewriter test checks the 500ms character reveal.
+- The typewriter reset test checks that a new sentence cancels old scheduled work.
 
 ## GitHub Pages
 

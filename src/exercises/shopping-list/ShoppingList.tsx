@@ -7,6 +7,12 @@ type ShoppingItem = {
 }
 
 export function ShoppingList() {
+  /*
+   * Interview target:
+   * - Hydrate only the shopping items from localStorage.
+   * - Persist the whole current item list after adds and removals.
+   * - Leave draft as temporary UI state so half-typed text does not survive reload.
+   */
   const [items, setItems] = useState<ShoppingItem[]>([])
   const [draft, setDraft] = useState('')
 

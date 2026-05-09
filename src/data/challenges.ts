@@ -28,6 +28,8 @@ export type Challenge = {
   summary: string
   brief: string
   acceptance: string[]
+  practiceFocus: string[]
+  constraints: string[]
   files: string[]
   examples: Example[]
   foundation: string[]
@@ -35,6 +37,9 @@ export type Challenge = {
   bruteForce: string
   optimalApproach: string[]
   edgeCases: string[]
+  rubric: string[]
+  commonMistakes: string[]
+  testTargets: string[]
   interviewQuestions: string[]
   walkthrough: string[]
   complexity: Complexity
@@ -74,6 +79,18 @@ export const challenges: Challenge[] = [
       'Reports a useful error state for rejected or non-OK responses.',
       'Accepts the standard RequestInit options object for headers and HTTP methods.',
       'Avoids updating state after the component unmounts or the request is obsolete.',
+    ],
+    practiceFocus: [
+      'Designing a reusable custom hook API that hides fetch details from components.',
+      'Modeling async work as a small state machine instead of scattered boolean flags.',
+      'Cleaning up effects so obsolete requests cannot update current UI.',
+      'Explaining browser fetch behavior clearly under interviewer follow-up.',
+    ],
+    constraints: [
+      'Keep the exported return shape as data, isLoading, and error.',
+      'Do the network work inside the hook, not inside PokemonList.',
+      'Use the browser fetch API directly. Do not install React Query, SWR, or Axios for this drill.',
+      'Treat non-2xx HTTP responses as errors even though fetch resolves the promise.',
     ],
     files: [
       'src/exercises/use-fetch/useFetch.ts',
@@ -121,6 +138,26 @@ export const challenges: Challenge[] = [
       'The server returns a non-2xx response that fetch would otherwise treat as a successful promise.',
       'JSON parsing fails because the response is empty or malformed.',
       'The options object is recreated on every render, causing repeated effects. In production you might memoize options or accept simpler primitive arguments.',
+    ],
+    rubric: [
+      'The hook is generic, so callers can specify the expected response type without casting in the component.',
+      'The first render and every new request have a deliberate loading state.',
+      'Success, failure, and cleanup paths each update only the state they own.',
+      'AbortController or an equivalent guard prevents stale request updates.',
+      'The component remains simple: it reads the hook result and renders loading, error, or data.',
+    ],
+    commonMistakes: [
+      'Forgetting that fetch only rejects for network failures, not HTTP 404 or 500 responses.',
+      'Setting state after unmount because the promise resolves after React has cleaned up the component.',
+      'Catching AbortError and showing it as a user-facing failure.',
+      'Returning loosely typed any data, which removes most of the value of a TypeScript hook.',
+      'Depending on a freshly created options object and accidentally refetching forever.',
+    ],
+    testTargets: [
+      'The Pokemon API is mocked so the test never depends on the real network.',
+      'A passing solution renders mocked Pokemon names through the existing PokemonList component.',
+      'The success path must not show an alert role, which catches false-positive error states.',
+      'A non-OK HTTP response must become a visible error that includes the status code.',
     ],
     interviewQuestions: [
       'Why does fetch not reject on HTTP 404 or 500?',
@@ -242,6 +279,18 @@ export function useFetch<TData>(
       'Keeps the component API close to useState so it is easy to adopt.',
       'Handles JSON parse failures without crashing the app.',
     ],
+    practiceFocus: [
+      'Wrapping browser persistence in a hook without making components storage-aware.',
+      'Using a lazy useState initializer to avoid repeated synchronous reads during render.',
+      'Serializing and deserializing unknown values with defensive JSON handling.',
+      'Keeping the API close enough to useState that callers can use functional updates.',
+    ],
+    constraints: [
+      'Keep the hook return value as a two-item tuple: value and setter.',
+      'Use the key passed to the hook; do not hard-code the todo storage key inside the hook.',
+      'Use localStorage and JSON. IndexedDB and server persistence are outside this exercise.',
+      'Do not crash the app when stored data is missing, malformed, or unavailable.',
+    ],
     files: [
       'src/exercises/local-storage-hook/useLocalStorage.ts',
       'src/exercises/local-storage-hook/TodoList.tsx',
@@ -288,6 +337,26 @@ export function useFetch<TData>(
       'The browser blocks storage access.',
       'The value contains Date, Map, Set, or functions that JSON cannot faithfully round-trip.',
       'Another tab changes the same key. This exercise does not require cross-tab synchronization.',
+    ],
+    rubric: [
+      'The hook reads storage exactly once for the initial state of a given mount.',
+      'The setter supports both direct values and functional updates, matching useState behavior.',
+      'Writes are centralized in an effect so callers only think in React state.',
+      'JSON.parse and JSON.stringify failures are handled without breaking the UI.',
+      'TodoList stays small and does not duplicate storage logic.',
+    ],
+    commonMistakes: [
+      'Calling localStorage.getItem on every render instead of using lazy initialization.',
+      'Returning only a custom save function, which makes the hook harder to adopt than useState.',
+      'Forgetting that localStorage stores strings and accidentally persisting [object Object].',
+      'Letting invalid JSON throw during initial render.',
+      'Using a storage key that is too generic and collides with other exercises or apps.',
+    ],
+    testTargets: [
+      'The test adds a todo through the real form and expects it to render immediately.',
+      'After page.reload(), the same todo must still be visible.',
+      'Malformed JSON in storage must fall back to the initial value.',
+      'The tests interact with UI, not hook internals, so implementation details stay flexible.',
     ],
     interviewQuestions: [
       'Why is localStorage access a side effect?',
@@ -369,6 +438,18 @@ export function useLocalStorage<TValue>(
       'Does not require cross-tab synchronization.',
       'Keeps the UI responsive while storage updates happen.',
     ],
+    practiceFocus: [
+      'Changing an existing component without rewriting its visible behavior.',
+      'Identifying the minimum state that needs to survive a browser refresh.',
+      'Keeping persistence in one place so future add, remove, or edit actions are covered.',
+      'Choosing a stable storage key and a recoverable initial state.',
+    ],
+    constraints: [
+      'Preserve the existing add and remove workflow.',
+      'Persist only the shopping items. The text currently being typed should not survive reload.',
+      'Use localStorage directly in this component unless you choose to extract a small helper.',
+      'Do not add routing, global state, or a backend for this exercise.',
+    ],
     files: ['src/exercises/shopping-list/ShoppingList.tsx'],
     examples: [
       {
@@ -412,6 +493,26 @@ export function useLocalStorage<TValue>(
       'The list is empty. Should storage contain [] or should the key be removed?',
       'crypto.randomUUID is unavailable in older environments.',
       'Future code adds another way to edit items. A single persistence effect still covers it.',
+    ],
+    rubric: [
+      'The initial state is hydrated from storage without a flash of the wrong list.',
+      'The persistence write mirrors the whole current list, so adds and removals both persist.',
+      'The draft input remains temporary state and clears after a successful add.',
+      'Storage parsing is defensive enough that corrupted saved data does not break the app.',
+      'The final component reads like an enhancement to the original app, not a rewrite.',
+    ],
+    commonMistakes: [
+      'Persisting only inside addItem and forgetting removeItem.',
+      'Persisting the draft input by accident, which restores half-typed text after refresh.',
+      'Calling the initializer immediately instead of passing it to useState for lazy hydration.',
+      'Assuming saved JSON always matches the current ShoppingItem shape.',
+      'Changing labels, roles, or form structure in a way that breaks user flow and tests.',
+    ],
+    testTargets: [
+      'The test adds an item through the existing form and verifies it appears.',
+      'After reload, the same item must still appear from localStorage.',
+      'Removing an item, reloading, and seeing it stay removed is part of the automated suite.',
+      'The test intentionally treats this as a user journey rather than checking localStorage directly.',
     ],
     interviewQuestions: [
       'When is a custom hook worth extracting, and when is component-local logic enough?',
@@ -553,6 +654,18 @@ export function ShoppingList() {
       'Resets correctly when the user submits a new sentence.',
       'Cleans up timers when the component unmounts or the sentence changes.',
     ],
+    practiceFocus: [
+      'Coordinating timer-based UI changes with React state and effect cleanup.',
+      'Separating input props from derived animated output.',
+      'Avoiding stale closures when scheduled callbacks run after a render.',
+      'Reasoning about Strict Mode, cleanup, and why duplicate timers happen.',
+    ],
+    constraints: [
+      'The output should be empty immediately after a new sentence is submitted.',
+      'Reveal exactly one additional character every 500 milliseconds for the default exercise.',
+      'Keep the parent form behavior intact; implement the animation in TypewriterEffect.',
+      'Clear pending timers whenever the sentence changes or the component unmounts.',
+    ],
     files: [
       'src/exercises/typewriter/TypewriterEffect.tsx',
       'src/exercises/typewriter/TypewriterPractice.tsx',
@@ -599,6 +712,27 @@ export function ShoppingList() {
       'The component unmounts while a timeout is pending.',
       'The typing speed changes while text is in progress.',
       'The sentence contains spaces or punctuation. The prefix logic should preserve them.',
+    ],
+    rubric: [
+      'The displayed text is always a prefix of the current sentence.',
+      'A new sentence resets the animation before any old timeout can append stale characters.',
+      'The component stops scheduling timers when the full sentence is visible.',
+      'Timer cleanup is present and correct, including under React Strict Mode.',
+      'The implementation is simple enough to explain at a whiteboard without hand-waving.',
+    ],
+    commonMistakes: [
+      'Rendering the full sentence immediately and only adding a delay around submit.',
+      'Using setInterval without clearing it, which keeps appending after completion.',
+      'Capturing an index in a stale closure and skipping or repeating characters.',
+      'Starting the next sentence from leftover displayed text.',
+      'Using CSS animation only, which hides the state-management problem the exercise is testing.',
+    ],
+    testTargets: [
+      'The test submits a sentence and expects the output to be empty immediately.',
+      'After roughly 500ms, exactly the first character should be visible.',
+      'The full sentence should not appear too early.',
+      'The whole sentence should appear after enough half-second ticks have elapsed.',
+      'Submitting a second sentence must reset the output and cancel stale scheduled work.',
     ],
     interviewQuestions: [
       'Would you use setInterval or recursive setTimeout, and why?',

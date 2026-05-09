@@ -6,6 +6,7 @@ test('root opens directly to the first lesson', async ({ page }) => {
   await expect(page.getByTestId('challenge-page')).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Build a custom useFetch hook' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Foundation' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Score your answer' })).toBeVisible()
   await expect(page.getByText('Recommended time and space complexity')).toBeVisible()
 })
 
@@ -22,6 +23,7 @@ test('each exercise page has a prompt, starter canvas, and hidden walkthrough', 
     }),
   ).toBeVisible()
   await expect(page.getByTestId('use-fetch-demo')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'What the tests check' })).toBeVisible()
 
   const walkthrough = page.getByText('Start by writing the return type')
   await expect(walkthrough).not.toBeVisible()

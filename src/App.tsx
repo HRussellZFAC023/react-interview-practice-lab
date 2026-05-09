@@ -92,6 +92,24 @@ function App() {
                 <span key={item}>{item}</span>
               ))}
             </div>
+            <div className="two-column compact">
+              <div>
+                <h3>What this trains</h3>
+                <ul>
+                  {active.practiceFocus.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>Rules of the drill</h3>
+                <ul>
+                  {active.constraints.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </section>
 
           <section className="chapter">
@@ -164,6 +182,28 @@ function App() {
           </section>
 
           <section className="chapter">
+            <h2>Score your answer</h2>
+            <div className="two-column">
+              <div>
+                <h3>A strong answer includes</h3>
+                <ul>
+                  {active.rubric.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>Common mistakes</h3>
+                <ul>
+                  {active.commonMistakes.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section className="chapter">
             <h2>Interviewer follow-ups</h2>
             <ul className="question-list">
               {active.interviewQuestions.map((question) => (
@@ -179,6 +219,14 @@ function App() {
                 <h2>Exercise workspace</h2>
               </div>
               <code>npm run test:submission</code>
+            </div>
+            <div className="test-targets">
+              <h3>What the tests check</h3>
+              <ul>
+                {active.testTargets.map((target) => (
+                  <li key={target}>{target}</li>
+                ))}
+              </ul>
             </div>
             {exerciseCanvas[active.slug as keyof typeof exerciseCanvas]}
             <details className="reveal">
