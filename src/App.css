@@ -1,0 +1,433 @@
+main {
+  min-height: 100vh;
+}
+
+.topbar {
+  align-items: center;
+  background: #ff6600;
+  border-bottom: 1px solid #d65300;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0.65rem max(1rem, calc((100vw - 1120px) / 2));
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand,
+.topbar a,
+.nav-button {
+  color: #111111;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.brand,
+.nav-button {
+  all: unset;
+  color: #111111;
+  cursor: pointer;
+}
+
+.brand {
+  font-weight: 800;
+}
+
+.topbar nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: flex-end;
+}
+
+.landing,
+.band,
+.challenge-grid,
+.exercise-layout {
+  margin-inline: auto;
+  max-width: 1120px;
+  padding-inline: 1rem;
+}
+
+.landing {
+  align-items: center;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  padding-block: 4rem 2.5rem;
+}
+
+.landing-copy {
+  max-width: 760px;
+}
+
+.eyebrow {
+  color: #8a4b00;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin-bottom: 0.55rem;
+  text-transform: uppercase;
+}
+
+.landing h1,
+.exercise-header h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  letter-spacing: 0;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.lede {
+  color: var(--pico-muted-color);
+  font-size: 1.05rem;
+  max-width: 720px;
+}
+
+.landing-actions,
+.pager {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.landing-actions a,
+.source-link,
+.pager button {
+  margin: 0;
+}
+
+.session-card,
+.challenge-card,
+.brief > div,
+.practice-panel,
+.learning-panel,
+.references,
+.demo-surface,
+.exercise-rail {
+  background: var(--pico-card-background-color);
+  border: 1px solid var(--pico-form-element-border-color);
+  border-radius: var(--pico-border-radius);
+  box-shadow: var(--pico-card-box-shadow);
+}
+
+.session-card {
+  padding: 1.1rem;
+}
+
+.session-card span {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.session-card ol,
+.interactive-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.session-card li {
+  border-top: 1px solid var(--pico-form-element-border-color);
+  display: grid;
+  gap: 0.2rem;
+  padding-block: 0.75rem;
+}
+
+.session-card li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.session-card li:last-child {
+  padding-bottom: 0;
+}
+
+.session-card code {
+  width: fit-content;
+}
+
+.band {
+  border-top: 1px solid var(--pico-form-element-border-color);
+  padding-block: 2.4rem;
+}
+
+.section-heading {
+  margin-bottom: 1rem;
+}
+
+.copy-grid,
+.learning-panel {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.challenge-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding-block: 1rem 2.4rem;
+}
+
+.challenge-card {
+  display: grid;
+  gap: 0.8rem 1rem;
+  grid-template-columns: 1fr;
+  padding: 1rem;
+}
+
+.card-meta,
+.challenge-card h3 {
+  grid-column: 1 / -1;
+}
+
+.card-meta {
+  color: var(--pico-muted-color);
+  display: flex;
+  font-size: 0.75rem;
+  font-weight: 800;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+
+.challenge-card h3 {
+  margin: 0;
+}
+
+.challenge-card p {
+  margin: 0;
+}
+
+.challenge-card button {
+  align-self: end;
+  grid-column: auto;
+  grid-row: auto;
+  margin: 0;
+  width: max-content;
+}
+
+.exercise-layout {
+  align-items: start;
+  display: grid;
+  gap: 1.4rem;
+  grid-template-columns: 230px minmax(0, 1fr);
+  padding-block: 2rem;
+}
+
+.exercise-rail {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.8rem;
+  position: sticky;
+  top: 4.2rem;
+}
+
+.exercise-rail button {
+  align-items: center;
+  background: transparent;
+  border-color: transparent;
+  color: #27313f;
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0.55rem;
+  text-align: left;
+  width: 100%;
+}
+
+.exercise-rail button.active {
+  background: var(--pico-primary-focus);
+  border-color: var(--pico-primary);
+  color: #111111;
+}
+
+.exercise-rail span {
+  align-items: center;
+  background: var(--pico-primary);
+  border-radius: 999px;
+  color: var(--pico-primary-inverse);
+  display: inline-flex;
+  flex: 0 0 1.5rem;
+  font-size: 0.75rem;
+  height: 1.5rem;
+  justify-content: center;
+  width: 1.5rem;
+}
+
+.exercise-page {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.exercise-header {
+  align-items: start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.exercise-header h1 {
+  font-size: clamp(2.1rem, 4.4vw, 3.2rem);
+}
+
+.source-link {
+  white-space: nowrap;
+}
+
+.pager {
+  justify-content: space-between;
+  margin-top: 0;
+}
+
+.brief {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.brief > div:first-child {
+  grid-column: 1 / -1;
+}
+
+.brief > div,
+.practice-panel,
+.learning-panel,
+.references {
+  padding: 1rem;
+}
+
+.brief h2,
+.panel-heading h2,
+.learning-panel h2,
+.references h2,
+.demo-copy h3 {
+  margin-bottom: 0.65rem;
+}
+
+.brief ul,
+.learning-panel ul,
+.learning-panel ol,
+.references ul,
+.steps {
+  margin-bottom: 0;
+}
+
+.practice-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.demo-surface {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.inline-form {
+  align-items: end;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.inline-form label {
+  grid-column: 1 / -1;
+  margin-bottom: -0.35rem;
+}
+
+.interactive-list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.interactive-list li {
+  align-items: center;
+  background: var(--pico-background-color);
+  border: 1px solid var(--pico-form-element-border-color);
+  border-radius: var(--pico-border-radius);
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  padding: 0.65rem;
+}
+
+.interactive-list button {
+  margin: 0;
+  padding: 0.45rem 0.65rem;
+}
+
+.typewriter-output {
+  background: var(--pico-background-color);
+  border: 1px dashed var(--pico-form-element-border-color);
+  border-radius: var(--pico-border-radius);
+  display: block;
+  font-family: var(--pico-font-family-monospace);
+  min-height: 3.4rem;
+  padding: 0.8rem;
+}
+
+.note,
+.empty-state {
+  color: var(--pico-muted-color);
+}
+
+footer {
+  border-top: 1px solid var(--pico-form-element-border-color);
+  color: var(--pico-muted-color);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 1.4rem 1rem;
+}
+
+@media (max-width: 900px) {
+  .landing,
+  .exercise-layout,
+  .brief,
+  .learning-panel,
+  .copy-grid,
+  .challenge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-rail {
+    position: static;
+  }
+
+  .exercise-header,
+  .pager {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .landing h1,
+  .exercise-header h1 {
+    font-size: 2.4rem;
+  }
+
+  .inline-form,
+  .challenge-card {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-card button,
+  .inline-form button {
+    grid-column: auto;
+    grid-row: auto;
+    width: 100%;
+  }
+}
