@@ -7,7 +7,7 @@ One Vite React repo for four interview-sized exercises inspired by React Practic
 - [Add persistence to localStorage for an existing app](https://reactpractice.dev/exercise/add-persistence-to-local-storage-for-an-existing-app/)
 - [Build a Typewriter effect component](https://reactpractice.dev/exercise/build-a-typewriter-effect-component/)
 
-The original starter templates are intentionally not copied here. This project gives you one modern React 19 + Vite workspace, SQLBolt-style lessons, NeetCode-style hints and complexity notes, hidden full solutions, starter canvases, clear acceptance checks, and Playwright submission tests. The challenge files themselves are not solved yet.
+The original starter templates are intentionally not copied here. This project gives you one modern React 19 + Vite workspace, single-column lessons, NeetCode-style hints and complexity notes, hidden full solutions, starter canvases, clear acceptance checks, and Playwright submission tests. The challenge files themselves are not solved yet.
 
 ## What
 
