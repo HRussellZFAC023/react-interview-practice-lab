@@ -1,14 +1,12 @@
 import { expect, test } from '@playwright/test'
 
-test('landing page explains the practice lab', async ({ page }) => {
+test('root opens directly to the first lesson', async ({ page }) => {
   await page.goto('/')
 
-  await expect(page.getByTestId('landing')).toBeVisible()
-  await expect(page.getByRole('heading', { level: 1 })).toContainText(
-    'Four React exercises',
-  )
-  await expect(page.getByRole('button', { name: 'Start first exercise' })).toBeVisible()
-  await expect(page.getByText('npm run test:submission')).toBeVisible()
+  await expect(page.getByTestId('challenge-page')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Build a custom useFetch hook' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Foundation' })).toBeVisible()
+  await expect(page.getByText('Recommended time and space complexity')).toBeVisible()
 })
 
 test('each exercise page has a prompt, starter canvas, and hidden walkthrough', async ({
@@ -19,14 +17,17 @@ test('each exercise page has a prompt, starter canvas, and hidden walkthrough', 
   await expect(page.getByTestId('challenge-page')).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Build a custom useFetch hook' })).toBeVisible()
   await expect(
-    page.getByText('src/exercises/use-fetch/useFetch.ts', { exact: true }),
+    page.locator('.file-list code').filter({
+      hasText: 'src/exercises/use-fetch/useFetch.ts',
+    }),
   ).toBeVisible()
   await expect(page.getByTestId('use-fetch-demo')).toBeVisible()
 
-  const walkthrough = page.getByText('Define the generic return type before writing')
+  const walkthrough = page.getByText('Start by writing the return type')
   await expect(walkthrough).not.toBeVisible()
-  await page.getByText('Reveal guided walkthrough').click()
+  await page.getByText('Hints').click()
   await expect(walkthrough).toBeVisible()
+  await expect(page.getByText('Show full solution')).toBeVisible()
 })
 
 test('next and previous controls move between exercises', async ({ page }) => {

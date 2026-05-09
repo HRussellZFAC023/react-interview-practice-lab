@@ -7,13 +7,13 @@ One Vite React repo for four interview-sized exercises inspired by React Practic
 - [Add persistence to localStorage for an existing app](https://reactpractice.dev/exercise/add-persistence-to-local-storage-for-an-existing-app/)
 - [Build a Typewriter effect component](https://reactpractice.dev/exercise/build-a-typewriter-effect-component/)
 
-The original starter templates are intentionally not copied here. This project gives you one modern React 19 + Vite workspace, Pico CSS theming, starter canvases, clear acceptance checks, and Playwright submission tests. The challenges are not solved yet.
+The original starter templates are intentionally not copied here. This project gives you one modern React 19 + Vite workspace, SQLBolt-style lessons, NeetCode-style hints and complexity notes, hidden full solutions, starter canvases, clear acceptance checks, and Playwright submission tests. The challenge files themselves are not solved yet.
 
 ## What
 
-This repo is a compact practice lab. Each page gives you the prompt summary, what to build, the files to edit, interview questions to think through, and a hidden guided walkthrough that explains the approach without pasting the final answer.
+This repo is a compact practice lab. Each page gives you the prompt, examples, foundations, mental model, brute-force discussion, optimal approach, edge cases, complexity target, interview follow-ups, starter canvas, hints, and a hidden full solution.
 
-![Landing page](docs/screenshots/landing.png)
+![Lesson page](docs/screenshots/landing.png)
 
 ## Why
 
@@ -121,7 +121,7 @@ Useful docs:
 
 ## Testing Philosophy
 
-`npm run test:e2e` checks the learning site itself: landing page, navigation, hidden walkthroughs, and starter canvases.
+`npm run test:e2e` checks the learning site itself: lesson navigation, hidden hints, solution reveal controls, and starter canvases.
 
 `npm run test:submission` checks exercise behavior. These tests are deliberately behavioral, not implementation-specific:
 
